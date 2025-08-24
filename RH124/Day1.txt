@@ -1,0 +1,31 @@
+RHCSA  VS  RHCE
+
+RH124 + RH134 + RH294 => RHCE
+#############################################
+
+- RHCSA
+
+RedHat Certified System Administrator
+(Basic Survival Skill) on RHEL 
+
+- RH124 -- Installation [cd, pwd, ls, date .....]{ user, networking, logs,ssh...}
+- RH134 -- Advance Linux [Scripting(shell), jobs(Task) schedule task] {Storage -- basic, swap, LVM, NAS} Security & COntainers
+
+Exam EX200-- RHCSA
+Duration - 3 Hours
+Validity -- 3 years.
+
+REDHAT
+
+#################################################
+
+- RHCE
+
+RedHat Certified Engineer
+
+RH294
+
+- Ansible - For Automation
+
+EX294 
+Duration - 4 Hours.
