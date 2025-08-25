@@ -1,0 +1,55 @@
+############################################################
+Install the RHEL in your VM, KVM, Hypervisor
+
+Choose your VM, localmachine or cloud. 
+
+###########################################################
+
+Closed Source 
+
+- Microsoft, Apple, CISCO
+- OS is not free
+- You can not customize
+- You can not distribute.
+- You can not replicate 
+- Support is paid. 
+- Source code is not available. 
+
+###########################################################
+
+Open Source
+
+- Linux, RHEL
+- OS is free.
+- You can customize. 
+- You can distribute.
+- You can replicate.
+- Support is paid.
+- Source code is available. 
+
+##########################################################
+
+		Operating System: Windows
+
+[Windows		[Windows			[GUI,
+ Kernel]		Libraries]			Tools]
+
+	*All tightly integrated by Microsoft.
+
+
+			Linux Kernel
+			[Linux Kernel]
+		* Created by Linux Trovalds.
+
+
+		Linux Distribution (Complete OS)
+
+		+[Linux Libraries & Tools]
+		+ GNU Libraries(apt,yum,pacman)
+		+ GNU (GNOME, KDE, Xfce, etc)
+
+	Example: Ubuntu, Fedora, Arch, Debian, etc
+
+#####################################################################
+
+
