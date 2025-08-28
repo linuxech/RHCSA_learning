@@ -52,4 +52,61 @@ Open Source
 
 #####################################################################
 
+Terminal VS Shell
+
+#Terminal
+A terminal is a text-based interface to enter commands into and print output from a computer
+system. 
+
+ This is the physical console from the Linux machine. The physical console supports
+multiple virtual consoles, which can run on separate terminals. Each virtual console supports an
+independent login session. 
+
+In Red Hat Enterprise Linux 9, if the graphical environment is available, then the login screen runs
+on the first virtual console, which is called tty1. Five additional text login prompts are available on
+virtual consoles two tty2 through six tty6.
+
+#Shell
+Shell runs in the Terminal.
+
+#####################################################################
+
+Signs					Name
+
+~				Tilde
+`				Back Tick
+!				Exclamation (Bang)
+@				At the rate
+#				Hash
+$				Dollar
+%				Percentage
+^				Carrot
+&				Amp Sign 
+*				Asterstiek
+()				Open and Closed Parentheses/Bracket
+-				Hyphen
+_				Under Score
+=				Equals
++				Plus
+{}				Open and closed curly brackets
+[]				Open and closed Square brackets
+|				Pipe/Verticle Bar
+\				Backward Slash
+/				Forwards Slash
+;				Semi Colon
+:				Colon
+'				Single Quote/Inverted comma
+"				Double Qoute/Inverted comma
+,				Comma
+<				Less than
+>				Greater than
+?				Question Mark
+.				Dot/Full stop
+
+###################################################################
+
+
+
+
+&				
 
