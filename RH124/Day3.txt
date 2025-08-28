@@ -1,0 +1,12 @@
+###################################################################
+Understanding Tab use
+
+Tab will allow you to autocomplete the filename/directory name that is available. 
+
+- Press Tab Once = will autocomplete the file name.
+- Press Tab Twice= will show the possible matches file/directroy
+
+#Also, for directory the directory name will end with /(forward Slash)
+#Note if space is being added when you type Tab, as it will shows that there are another files with same name.
+
+
