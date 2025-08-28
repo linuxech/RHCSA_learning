@@ -104,9 +104,24 @@ _				Under Score
 .				Dot/Full stop
 
 ###################################################################
+Some Common Commands
+
+Command					Name
+
+cd				Change Directroy
+pwd				Present Working Directory
+ls				List Directory
+man				Mannual Page
+head				List the first 10 lines of file
+tail				List the last 10 ines of file
+cat				Read a file
+date				Prints the date and time
+cal				Prints calendar for current month
+
+--help				To get the help and option for a command use this flag
+
+#######################################################################
 
 
-
-
-&				
+				
 
