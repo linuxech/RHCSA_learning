@@ -10,3 +10,29 @@ Tab will allow you to autocomplete the filename/directory name that is available
 #Note if space is being added when you type Tab, as it will shows that there are another files with same name.
 
 
+CLI - Command Line Interface
+
+#################################################################
+
+File System
+
+The Linux system stores all files on file systems, which are organized into a single
+inverted tree known as a file-system hierarchy.
+
+
+					/
+					|
+					|
+					|
+ -------------------------------------------------------------------------------
+ |	|	|	|	|	|	|	|	|	|	|
+ |	|	|	|	|	|	|	|	|	|	|
+bin   boot     dev     etc     home    root    run     sbin    tmp     usr     var
+ !				|					|	|
+ !				|					|	|
+ !		----------------|					|	|
+ !		|	|	|		------------------------|	|
+ !	     alice    Bob      Eve		|	|	|	|	|
+ !-------------------------------------------> bin    local    sbin    tmp     tmp
+									|----->|
+
