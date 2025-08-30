@@ -102,4 +102,12 @@ path name. For example, relative to the /var directory, the message log file is 
 
 ######################################################################
 
+Change Directory
+
+cd .		Current/Present Directory
+cd ..		Previous Directory
+cd ~		Root/Home Directory
+cd -		Move to previous working Directory
+cd		Current Directory
+
 

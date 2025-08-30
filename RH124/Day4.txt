@@ -1,0 +1,28 @@
+Move Files and Directories
+###############################################################
+
+cp --> Copy files or Directories
+mv --> Move files or Directories
+rm --> Remove files 
+rmdir --> Remove Directories
+
+Links
+You can create multiple file names that point to the same file. These file names are called links.
+
+Softlink/Symbolic --> ln -s
+
+Hardlink --> ln 
+
+NOTE: Use Absolute Path
+
+Manual Page
+man
+
+Standard Output (1) >>
+Standard Input (0) 
+Standard Error (2) >>
+
+Journalctl
+
+
+
