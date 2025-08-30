@@ -15,7 +15,10 @@ $Modes in vim$
 Command Mode-- Initial Mode.
 Extended Mode-- : -- help to access the Extended Mode. 
 Edit Mode-- Insert Mode -- I 
-Visual Mode -- Visual Edit Mode(Character Mode, Line Mode, and Block Mode) 
+Visual Mode -- Visual Edit Mode
+		- Character Mode- Use the character selection in Visual Mode
+		- Line Mode - Select the entire line.
+		- Block Mode- Select the block of character. 
 
 
 NOTE: vim consider space in wc.

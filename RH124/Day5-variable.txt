@@ -1,0 +1,34 @@
+Change the Shell Environment
+#################################################################
+
+Shell Variable Usage 
+
+Syntax
+
+VARIABLE_NAME=value
+
+--------------------Example--------------------------
+
+RHCSA=RH124+RH134
+
+echo $RHCSA
+###################################################################
+bash -- command refresh the terminal and the recent commands
+		You are cooked
+##################################################################
+
+Change Shell Enviroment
+
+Example:
+
+date=cal
+cal=date
+
+echo $date
+echo $cal
+
+$date
+
+##################################################################
+
+
