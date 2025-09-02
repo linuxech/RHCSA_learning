@@ -23,8 +23,10 @@ Stages--
 	- Systems can be booted into defferent targets.
 
 ##################################################################
+Rescue a System
 
-Kernel Panic
+
+#Kernel Panic
 
 - Missing drivers
 - Bad drivers
@@ -41,4 +43,71 @@ sudo grub2-set-default 1
 	- Start services
 	- Start GUI
 	- Mount/read-write
+
+######################################################################
+Introduction to Systemd services
+
+Daemon = System Service
+
+System Service
+
+- Web Servers
+- File Servers
+- Network Servers
+
+#Linux Service Naming Conventions
+
+- httpd
+- smbd
+- sshd
+- dhcpd
+
+#SysV init Proces Tree
+
+init--------------abrtd
+	|
+	|---------agetty
+	|
+	|---------auditd---------{gdbus}
+	|	
+	|---------crond
+	|
+	|---------dbus-----daemon-----{dbus-daemon}
+	|
+	|---------hald------hald-runner	
+	|
+	|		---{hald}
+
+#SysV init Runlevels
+
+- acpid				- acpid
+- atd				- atd
+- crond				- crond
+- iptables			- startx
+
+#SysV init Shortcomings
+
+- Slow startup
+- No service dependencies
+- No persistent network
+
+
+#Upstart
+
+- Starts process asynchronously
+- Monitors running processes
+- Backward compatible with SysV init
+- Can be extended to interact with other event systems
+- User by Enterprise Linux 6
+
+#Systemd
+
+- Suite of software replacing traditional systems
+- Aims to unify Linux service configuration
+- Includes init system
+- Manages devices,login, network connections and logging
+- Most major distributions use systemd
+
+############################################################
+Get systemd service status
 
