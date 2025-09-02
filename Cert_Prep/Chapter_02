@@ -1,0 +1,44 @@
+- Understand the Linux Boot Process
+
+Stages--
+	#Firmware Stage: 
+	- Execute code in the BIOS for legacy systems
+	- Execute code in the UEFI firmware for new computers.
+	- Starts bootloader
+	#Bootloader Stage:
+	- Firmware executes the bootloader(grub2) code on the drive
+	- Bootloader reads its configuration file
+		BIOS:/boot/grub2/grub2.cfg
+		UEFI:/boot/efiEFI/redhat/grub.efi
+	- Execute the kernel
+	#Kerne State:
+	- Loads the ramdisk into RAM
+	- Loads device drivers and config files from ramdisk
+	- Unmounts ramdisk and mounts root filesystem
+	- Starts the initialization stages
+	#Initialization Stage:
+	Systemd Targets
+	- Target is specific configuration
+	- Default target graphical.target
+	- Systems can be booted into defferent targets.
+
+##################################################################
+
+Kernel Panic
+
+- Missing drivers
+- Bad drivers
+- Boots into older kernel
+- Boots into different systemd target
+
+#Change default Boot kernel
+sudo grub2-set-default 1
+
+#Systemd Emergency Target
+- Requires root password
+- Does not:
+	- Load drivers
+	- Start services
+	- Start GUI
+	- Mount/read-write
+
