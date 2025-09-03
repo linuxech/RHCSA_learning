@@ -111,3 +111,100 @@ init--------------abrtd
 ############################################################
 Get systemd service status
 
+Systemd Unit Types
+- Devices
+- Mounted Volumes
+- Network sockets
+- System timers
+- Targets
+
+#Systemd Units
+		Systemd objects that store the configuration on disk as a unit file. 
+
+#systemctl list-units
+		Command that lists systemd units currently being held in memory
+		Units are running or were running previously.
+
+#systemctl list-unit-files
+		Command that lists installed unit files stored on disk.
+		Includes the auto-start state.
+
+#systemctl status
+		Command that shows the status of a specified unit file or the 
+		the system status if a unit isn't provided. 
+
+#############################################################################
+
+Managed systemd services
+
+Need privelages-
+
+systemctl disable [service name]
+systemctl start [service name]
+systemctl restart [service name]
+
+systemctl mask [service name]
+systemctl unmask [service name]
+
+##########################################################################
+
+Make systemd services persistent
+
+#########################################################################
+
+Configure Networking
+
+Network Settings
+
+- Hostname
+- IP address
+- Subnet Mask
+- Default Gateway
+- Name server
+
+#Configure Hostname
+		vi /etc/hostname
+		hostname
+#Configure Hostname(systemd)
+		sudo hostnamectl set-hostname
+		rhhost1.localhost.com
+#Host Configuration /etc/hosts
+
+
+#Global Nameserver Configuration
+		/etc/resolv.conf
+	nameserver 192.168.2.206
+	nameserver 192.168.2.207
+
+#Network Interface Settings
+		/etc/netwokManager/system-connections/
+
+#Network Interface Settings(Legacy)
+		/etc/sysconfig/network-scripts/
+
+#Network Interface Settings (nmcli)
+		sudo nuclei con mod eth0 ipv4.dns "192.168.2.254"
+		sudo nuclei connection reload
+	
+#Legacy Network Interface Naming
+	Interface Type			Interface Name
+	Ethernet			eth0
+	Wireless			wlan0
+	Wide area network		wan0
+
+#Network Interface Naming
+	Interface Type			Interface Name
+	BIOS Supplied			en01
+	PCI Express slot		ens1
+	PCI Slot			enp3s0
+	Invalid Firmware information	eth0
+
+#Network Configuration Tools
+	- ip/ifconfig
+	- nmcli
+	- nmtui
+	- nm-connection-editor
+	- Gnome network GUI
+
+######################################################################
+Configure a system to use network time protocol
