@@ -208,3 +208,36 @@ Network Settings
 
 ######################################################################
 Configure a system to use network time protocol
+
+in GUI
+- Go to Date and Time menu
+
+In CLI
+
+#timedatectl list-timezones
+			Search for your timezone
+#timedatectl set-time 11:25:00
+		To set time, you can also use YYYY-MM-DD for date format.
+
+#timedatectl set-time "YYYY-MM-DD HH:MM:SS"
+		To set the time, date.
+
+#timedatectl set-ntp true
+		To set the time and date update automatically using Network time protocol.
+
+#########################################################################
+Manage one-time jobs with at
+
+at Syntax
+		at <time format>
+
+#at Time Format
+#at time Increments
+#at Specifc date and time
+#at Combined Time and Date formats
+		- at Time date[hh:mm MMDDYY]
+
+#batch job
+		Runs only if the system load average is below 0.8.
+
+
