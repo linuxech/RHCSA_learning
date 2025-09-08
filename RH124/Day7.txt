@@ -1,0 +1,21 @@
+Objective: Superuser Access
+
+Most operating systems have a superuser that has all power over the system. In Red Hat Enterprise
+Linux, it is the root user.
+
+sudo --- Super User do
+
+To give privalages to local users. 
+
+sudo is a method/way we provide privalages to local users
+
+# Direct (Individually)
+Syntax			username ALL=(ALL)	ALL
+# Indirect (Groups)
+Syntax			%groupname ALL=(ALL)	ALL
+
+1st ALL -- Host
+2nd ALL -- Users(Root, system, regular)	
+3rd ALL -- All Commands. 
+
+
