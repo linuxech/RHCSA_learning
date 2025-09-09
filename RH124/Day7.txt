@@ -19,3 +19,14 @@ Syntax			%groupname ALL=(ALL)	ALL
 3rd ALL -- All Commands. 
 
 
+Example:
+
+Full -- Username /%groupname  ALL=(ALL) NOPASSWD:ALL
+
+Linked -- Username/%groupname ALL=(ALL) NOPASSWD: /usr/sbin/useradd, /usr/sbin/usermod 
+
+------------------------------------------------------------------------
+
+/etc/sudoers --> Main Sudo configuration
+/etc/sudoers.d/ --> Random File
+
