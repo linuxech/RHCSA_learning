@@ -1,11 +1,33 @@
 		User Management Assigment
 
 - Create directory on system with the name of projectxyz & projectabc.
-- Create user on system with the name of harry, natasha, sarah and thomas. 
+# sudo mkdir /projectxyz 
+# sudo mkdir /projectabc
+
+- Create user on system with the name of harry, natasha, sarah and thomas.
+# sudo useradd harry
+# sudo useradd natasha
+# sudo useradd sarah
+# sudo useradd thomas
+
 - Create user's password as password123.
+# echo "harry:password123" | sudo chpasswd
+# echo "natasha:password123" | sudo chpasswd
+# echo "sarah:password123" | sudo chpasswd
+# echo "thomas:password123" | sudo chpasswd
+
 - Create Secondary group on system with the name of projectx & projecta.
+# sudo groupadd projectx
+# sudo groupadd projecta
+
 - Add harry & natasha user on projecta supplementary group. 
+# sudo usermod -aG projecta harry
+# sudo usermod -aG projecta natasha
+
 - Add sarah & thomas user on projectx supplementary group.
+# sudo usermod -aG projectx sarah
+# sudo usermod -aG projectx thomas
+
 
 - Set user-password policy on harry & natasha user as per given instruction.
 	- Password must be expired after 65 days.
@@ -13,4 +35,19 @@
 	- User must received message before 10 days, password going to be expire.
 	- User can change his password only within 6 days after password expiry.
 	- User user-account must be closed permanently on 2nd Oct 2025.
+
+# For harry
+sudo chage -M 65 -m 5 -W 10 -I 6 harry
+sudo chage -E 2025-10-02 harry
+
+# For natasha
+sudo chage -M 65 -m 5 -W 10 -I 6 natasha
+sudo chage -E 2025-10-02 natasha
+
+--------------------------------------------------------------------------
+
+Check to verify 
+
+# chage -l harry
+# chage -l natasha
 
