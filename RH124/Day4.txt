@@ -48,9 +48,9 @@ Common Section of Linux Manual
 5	File formats				For many configuration files and structures.
 6	Games and screensavers			Historical section for amusing programs.
 7	Conventions, standards,			Protocols, file systems. 
-	and miscellaneous 
+	and miscellaneous
 8	System administration			Maintenance tasks
-	and privileged commands 
+	and privileged commands
 9	Linux kernel API			Internal kernel calls.
 
 ############################################################################
