@@ -107,3 +107,9 @@ permission for other on the sampledir directory:
 
 [user@host ~]$ chmod 750 sampledir
 
+-----------------------------------------------------------------------
+
+#By defaut the directory have the execute permission. 
+#File does not have the execute permission by default, untill unless assigned otherwise. 
+
+
