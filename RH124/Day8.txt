@@ -106,3 +106,4 @@ Set read, write, and execute permissions for user, read and execute permissions 
 permission for other on the sampledir directory:
 
 [user@host ~]$ chmod 750 sampledir
+
