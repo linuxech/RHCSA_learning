@@ -91,9 +91,9 @@ In the 3-digit octal representation of permissions, each digit stands for one ac
 to right: user, group, and other. To determine each digit:
 
 • Start with 0.
-• If you want to add read permissions for this access level, then add 4.
-• If you want to add write permissions, then add 2.
-• If you want to add execute permissions, then add 1
+• Read permissions for this access level, then add 4.
+• Write permissions, then add 2.
+• Execute permissions, then add 1
 
 The following list shows some examples for changing permissions with the octal method:
 
@@ -113,3 +113,4 @@ permission for other on the sampledir directory:
 #File does not have the execute permission by default, untill unless assigned otherwise. 
 
 
+#Directory execute permission allows the user to enter into the directory. 
