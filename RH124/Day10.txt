@@ -1,0 +1,10 @@
+Monitor and Manage Linux Processes
+
+What is Process?
+
+A process is a running instances of a launched, executable program. 
+From the moment a process is created, it consist of some items. 
+
+- An Adress Space of Allocated Memory
+- Security properties including ownership credentials and privileges
+- 
