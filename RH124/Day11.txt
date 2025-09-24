@@ -10,5 +10,43 @@ kill -15 will only kill a process that is in running state.
 
 kill -9 will kill the process in any state.
 
+uptime -- Print the first line of TOP.
+
+
+Per CPU Load Avrage -- Sum of total Load/100
+
+lscpu -- list the cpu in the system. 
+
+-----------------------------------------------
+
+Control Services and Daemons
+
+Daemons -- Background process it can be process or application
+
+All daemons processes have d at the end. For example: https, sshd, firewalld
+
+-- Manual -- You can manually manage the processes.
+You can do the following:  
+start
+stop(kill) using pid's
+Do not offer the start at boot time 
+No monitoring
+
+
+-- Systemd -- Also called Dynamic Service Manager
+
+You can manage the daemon using systemctl to do the following:
+
+Start
+Stop
+restart
+start at boot
+status
+
+# Service Vs Daemon
+ Search about it. 
+
+
+
 
 
