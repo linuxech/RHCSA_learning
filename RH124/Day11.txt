@@ -1,0 +1,14 @@
+Kill & Jobs
+
+Kill -- To end a process/jobs
+There are 64 ways of killing process
+
+kill -9 -- SIGKill -- Means Brutally Kill
+kill -15 -- SIGTerm -- Soft kill
+
+kill -15 will only kill a process that is in running state. 
+
+kill -9 will kill the process in any state.
+
+
+
