@@ -241,3 +241,86 @@ at Syntax
 		Runs only if the system load average is below 0.8.
 
 
+#######################################################################
+Manage reoccuring user jobs with cron
+
+Types of Cron Jobs
+
+- User Cron Jobs
+	- Specific to each user
+	- Managed by users
+	- Stored in /var/spool/cron/user
+
+- System Cron Jobs
+	- System-wide
+	- Managed by root
+	- Run by the operating system
+	- Stored in /etc/cron.d
+
+---crontab------Syntax-----Example--------------
+
+45 23 * * 6 /home/user1/bin/backup.sh
+
+Minute - 45 [0-59]-- */10(every 10 minute)
+Hour - 23 [0-23]
+Day	- * 
+Month	- *
+Day of the week	- 6	
+
+Command to run	- /home/user1/bin/backup.sh
+
+-------------------------------------------------
+
+Online Crontab Generator 
+crontab-generator.org
+
+OR 
+See Man pages 
+
+man 5 crontab
+
+########################################################
+Manage reoccuring system jobs with cron
+
+User Cronjobs
+
+- Crontab file specific to each user.
+- Managed by normal users. 
+- Stored in /var/spool/cron/username
+
+--------editing/creating a cron job---------
+ 
+crontab -e
+
+0 1 * * * rsync -a ~/Documents/	~/Documents.bak
+
+---------------exit------------------------
+
+crontab -l (to list the cron jobs)
+
+learn more about using man crontab
+learn more about crontab forman use 
+man 5 crontab
+
+#########################################################
+Limit access to at and cron
+
+System Cron Jobs
+
+Example:
+sudo vi /etc/cron.d/backupdocs
+
+#Enter in Insert mode
+
+0	1	*	*	*	root	rsync -a	/home/user1/Documents/	/home/user1/Documents.bak
+
+#Exit the editing file
+
+Test Cronjob action
+
+- Log in as the user
+- Run the desired commands.
+- If they work, place them in crontab file. 
+
+Read the man page for crontab 
+
