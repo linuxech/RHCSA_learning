@@ -1,0 +1,16 @@
+Chapter 10 -- Configure and Secure SSH
+
+What is SSH?
+SSH is a protocol allows you to access your linux machine remotely.
+
+How to check ssh current info?
+rpmquery openssh
+
+systmctl status sshd
+
+First check the target machine availability
+
+ping to the ip of the target machine to check connectivity. 
+
+
+
