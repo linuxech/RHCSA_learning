@@ -65,6 +65,21 @@ After saving and authentication with password SSH private key is changed to Auth
 
 ----------------------------------------------------------------------
 
+Note: Set the StrictHostKeyChecking parameter to yes in the user-specific
+~/.ssh/config file or the system-wide /etc/ssh/ssh_config file, so that the
+ssh command always aborts the SSH connection if the public keys do not match.
+
+
+------------------------SSH Key Management-----------------------------
+
+If a server's public key is changed because the key was lost due to hard drive failure or it was replaced for some 
+legitimate reason, then for successful login, you must edit the known hosts file to replace the old public key 
+entry with the new public key.
+
+
+The /etc/ssh/ssh_known_hosts file stores the public key file for each user on the SSH client. Each key consists of 
+one line, where the first field is the list of hostnames and IP addresses that share the public key. The second field 
+is the encryption algorithm that is used for the key. The last field is the key itself.
 
 
 
