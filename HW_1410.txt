@@ -1,0 +1,7 @@
+-- Read NTP
+-- Read IPs
+--Read Classes.
+-- Read DNS
+-- Read gateway/Interface
+
+
