@@ -1,0 +1,88 @@
+Managing Networking
+
+Types of Address
+
+- Physical Address 
+- Logical Address
+
+#Logical Address Type:
+
+IPV4 -- Internet Protocol Version4 
+IPV6 -- Internet Protocol Version6
+
+#Length Bits 
+
+IPV4 -- 32 Bits
+IPV6 -- 128 Bits
+
+#Octet
+
+IPV4 -- X.X.X.X
+IPV6 -- X:X:X:X::X:X:X:X
+-----------------------------------------------------------------------------
+
+IPV4 Range (Class) :-
+
+Class A -- 0-126 (Wide Range)
+Class B -- 128-191 
+Class C -- 192-223
+Class D -- 224-239 (Multi-Casting)
+Class E -- 240-255 (Research & Development)
+
+127.0.0.0 -- Loopback (Used for NIC)
+
+---------------------------------------------------------------------------
+Octet 
+
+We get Network and Host ID in Octet.These ID are represent by Binary Number. 
+
+Network ID		Host ID
+  (1)			  (0)
+
+Class A -- N H H H
+Class B -- N N H H
+Class C -- N N N H
+
+Netmask-- A netmask is a 32-bit number that separates an IP address into a network address and a host address. 
+
+Class A -- N H H H
+	  255.0.0.0 	-/8(SubnetMask)
+Class B -- N N H H
+	 255.255.0.0	-/16(SubnetMask)
+Class C -- N N N H
+	 255.255.255.0	-/24(SubnetMask)
+
+SubnetMask - A subnet mask is a 32-bit number used in IP addressing to separate an IP address into its network and host portions. It.
+
+-----------------------------------------------------------------------------
+Private vs Public IP
+
+Private IP is Static IP. 
+Public IP is for global use. 
+
+-----------------------------------------------------------------------------
+Domain Name Server (DNS)
+
+Used to resolve a website/domain name to IP. 
+
+DNS= Resolve the Domain Name.
+
+GATEWAY
+A gateway is a network node that acts as an entry and exit point for data between two different networks that use different protocols.
+
+INTERFACE
+Definition of interface | PCMagAn interface is a point of interaction or a shared boundary where two separate systems, devices, or people can exchange information.
+Example:
+ens160
+
+---------------------------------------------------------------------------
+
+Networking Model
+
+TCP/IP Model
+
+- Application
+- Transport
+- Internet
+- 
+
