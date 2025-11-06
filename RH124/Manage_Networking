@@ -84,5 +84,49 @@ TCP/IP Model
 - Application
 - Transport
 - Internet
-- 
+- Physical 
 
+--------------------------------------------------------------------------
+
+nmcli  ------ Network Manage Command Line Interface
+nmtui --- Network Manage Text User Interface
+
+Use nmcli as it is mostly use in production enviroment.
+
+ Impt file:
+etc/resolv.conf -- DNS info 
+#########################
+Commands to show IP
+
+ipconfig
+ip a s
+hostname -i
+#########################
+route -n 
+
+ip linkshow -- to show Interface
+			Impt Note-- You can make more than one connection, but you can activate one connection at a time. 
+
+##########################
+
+Example:
+
+Add connection to ethernet:
+		nmcli connection add con-name private type ethernet ifname ens160 ipv4.method auto
+
+###########################
+For manual connection you need basic information first. 
+
+ip	-- 10.10.10.20
+Subnet	-- 255.0.0.0
+Gateway	-- 10.10.10.2
+DNS	-- 8.8.8.8
+
+To proceed
+	nmcli connection add con-name public type ethernet ifname ens160 ipv4.method manual ipv4.addresses 10.10.10.20/8 ipv4.gateway 10.10.10.2 ipv4.dns 8.8.8.8
+
+This would successfully add the manual connection with above mentioned inputs. 
+
+------------------------------------------------------------------------------------
+
+ 
