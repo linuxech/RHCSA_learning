@@ -128,5 +128,29 @@ To proceed
 This would successfully add the manual connection with above mentioned inputs. 
 
 ------------------------------------------------------------------------------------
+Test on your own 
+
+IP : 	172.16.11.219
+Subnet: 255.255.0.0
+Gateway:172.16.11.1
+DNS:	4.4.4.4
+
+-------------------------------------------------
+COntains the current connection file and information.
+
+/etc/NetworkManager/system-connections/
+
+--------------------------------------------------
+
+nmtui -- text based. 
+
+-------------------------------------------------
+##How to change the host name
+
+hostnamectl set-hostname classroom.example.com  //this command will change the hostname to classroom.example.com
+
+You can also use nmtui to change the hostname of a machine
+
+
 
  
