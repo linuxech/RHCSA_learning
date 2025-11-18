@@ -1,0 +1,33 @@
+#Repositry 
+
+It contains url of the packages from where packages will be installed. 
+In case if your system do not have any repositry, there won't be any package/application will installed. 
+
+------------------------------------------------------------------------------
+RPM - RedHat Package Manager
+YUM - Yellowdog Updater, Modified
+DNF - Dandified YUM
+------------------------------------------------------------------------------
+
+#RPM (Red Hat Package Manager)
+- Low-level package manager
+- Handles .rpm package installation, removal, verification.
+- Does not automatically manage dependencies.
+
+#YUM (Yellowdog Updater, Modified)
+- High-level package manager built on top of RPM.
+- Resolves dependencies automatically.
+- Supports repositories, groups, plugins.
+- Used on RHEL/CentOS 5 & 6, early 7.
+
+#DNF (Dandified YUM)
+- Next-generation replacement for YUM.
+- Faster, more reliable dependency solver.
+- Lower memory usage and better performance.
+- Default on RHEL/CentOS 8, Fedora 22+, and later versions of Rocky/Alma.
+
+------------------------------------------------------------------------------
+Apache package name -- httpd  
+Tomcat package name -- 
+Nginx package name -- 
+
