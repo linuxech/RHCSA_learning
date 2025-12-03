@@ -39,6 +39,10 @@ System administrators optimize the performance of a system by adjusting device s
 on various use case workloads. The tuned daemon applies tuning adjustments both statically and
 dynamically by using tuning profiles that reflect particular workload requirements.
 
+tuned-adm profile ---- select the profile and implement that profile. 
+
+tuned-adm recommend	// Exam based is enable to recommended profile by system.
+
 - Configure Static Tuning
 
 

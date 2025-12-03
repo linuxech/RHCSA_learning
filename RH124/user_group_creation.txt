@@ -1,0 +1,52 @@
+#Create a user with name First_Last and enter a password.
+
+useradd First_Last
+passwd First_Last
+
+---------------------------------------------------------------
+
+#Adding the user to Group Student
+
+groupadd student
+usermod -aG student First_Last
+
+groups First_Last // verify the user's group
+
+---------------------------------------------------------------
+#Using the Chage to make changes to Password policy of user
+
+chage -l First_Last  /list the details
+chage -E $(date -d +90days +%Y-%m-%d) First_Last   // Change the password expiration to 90Days. 
+
+chage -M 30 First_Last   /change the Maximum days before password change to 30 days
+
+/etc/shadow  -- Files that contains password policy and the encrpted password. 
+##For example##
+tony:$6$rounds=100000$st/MWzY9EB.Q80oS$t8uEupnjdSlRKOwPSpHdmCDLnFjdVd43sUylBnipekCxKUwQHnWOgpHtT/q6FD2W2fdup/WalJ/EkPIgq4anV/:20350:0:30:7::20440:
+
+20350 = The days from last passwd change from beginning. Beginning from 1970. 
+0 = The minimum no. of days since last passwd change, before the user change the password.
+30 = The maximum no. of days without password change. 
+7 = The no. of days ahead to warn the user. 
+20440 = The when the accunt exipires from 1970.
+######Example##########
+
+echo SecretPassword | passwd --stdin First_Last   // Using the SecretPassword as Pipline to be entered when asked for password automatically. 
+
+mkpasswd // Utility tool that helps in generating and storing the encrypted password in manager. 
+
+----------------------------------------------------------------
+#Locking the user that generally happens after the password is expired if No value is set. 
+
+passwd -l First_Last
+				// Both commands lock the user from authenticating using the password.
+usermod -L First_Last 
+
+----------------------------------------------------------------
+#Deleting the user from the system. 
+
+userdel First_Last  // Deleting the user shell and services, except their home directory.
+
+userdel -f First_Last  // use the force flag to remove the user entirely, except their home directory. 
+
+--------------------End-----------------------------------------
