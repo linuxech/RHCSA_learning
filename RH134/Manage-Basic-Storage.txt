@@ -77,11 +77,11 @@ Between 2 GB and 8 GB 		Same as RAM 				Twice the RAM
 Between 8 GB and 64 GB 		At least 4 GB 				1.5 times the RAM
 More than 64 GB 		At least 4 GB 				Hibernation is not recommended
 
--------------------------------------------------------------------------------------
+-------------------------------------------------------------------------
 lsblk -- list block devices.
 
 example:
-partition creation 
+partition creation  \\ This will create the temprory Swap only
 
 fdisk /dev/sdc 		\This will run the fdisk tool. Explore the options
 			\ use these commands to create a partition and exit and save.
@@ -91,7 +91,44 @@ partprobe /dev/sdc 	\To ping kernel to re-read the disk partition
 mkfs.xfs /dev/sdc1	\Create file system with xfs in sdc1 mount point.
 mkswap /dev/sdc2	\It prepares the disk partition or files to be used as swap space.
 
---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
+How to create Permanent Mount point and Swap. 
 
+By making the entry of the mount and swap in the fstab file. 
 
+vim /etc/fstab		\ edit mode in file
+#Format of fstab		\You will need device name, UUID
+			\ You need Mountpoint of filesystem
+			\ Default of the filesystem 
+
+#use blkid 		\To list the UUID and device name 
+
+Mention the UUID in the fstab file	\ Remove the qoutes 
+
+UUID=XXXXXXXX		/data	xfs	defaults	0 0
+/dev/sdc2	none swap	defaults	0 0
+
+				\ This entry need to be done in the similar format. 
+
+####Systemctl dameon-reload ##########
+####mount -a #########################	\This will help you check if the entry in fstab was right or wrong.
+
+swapon /dev/sdc2 	\to turn the swap on and this will remain permanent as long as the entry exist in fstab file. 
+
+--------------------------------------------------------
+How to remove the permanent swap?
+
+- Remove the entry from the fstab file. 
+- Run systemctl dameon-reload 
+- Run mount -a 
+- Check lsblk
+- If swap is still showing run umount /data
+- swapoff /dev/sdc2
+- wipefs -a /dev/sdc1
+- fdisk /dev/sdc
+	- Proceed to delete the partition. 
+- partprobe /dev/sdc
+- run lsblk to list the files. 
+
+#####search about commands before running them ##############
 
