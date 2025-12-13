@@ -1,0 +1,19 @@
+How to install the RHEL Manually. 
+
+-- Add the RHEL file.
+-- Assign the basec memory,processor etc. 
+-- Select the ISO Image of RHEL.
+
+You will get the option for Installation and memory. 
+Disk partition will be done based on the Disk type. BIOS or UEFI.
+
+-- When partitioning	
+	- Select Custom
+	- Create the partition
+	- Enter the Mount Point. 
+	- Enter the Swap
+	- Assign all the created mount point the dedicated space. 
+-- Can be given Hostname in Network. 
+-- Lock the root user. 
+-- Create the user with Root privelages. 
+-- Begin the Installation.
