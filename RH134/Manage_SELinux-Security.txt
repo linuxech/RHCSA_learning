@@ -1,0 +1,50 @@
+Manage SELinux Security
+
+SELinux was developed by the NSA US. 
+The main goal is to secure system/File/Port. 
+
+Security Enhanced Linux (SELinux) is a critical security feature of Linux. Access to files, ports, and other resources 
+is controlled at a granular level. Processes are permitted to access only the resources that their SELinux policy or 
+Boolean settings specify.
+
+The policy is known as Target Policy. 
+-----------------------------------------------------------------
+Manadatory Access Control -- 
+Can be used to restrict even Root users. 
+Available in SELinux. 
+Top Level/Granular Level Security
+
+Discretionary  Access Control -- Allows root user to be super user. Tradtional Security.
+
+
+Features				DAC							MAC
+
+Control Ownership			File Owner					Admin/Policy
+Flexibility				More Flexible/Less Security			Less Flexible/Highly Secure
+	Example				chmod and chown	etc				SELinux
+Root User Control			root can access all things.			Root is restricted
+Policy					Permission based, No policy			Strict Policy
+-------------------------------------------------------------------
+
+SELinux has the following operational modes:
+• Enforcing : SELinux enforces the loaded policies. This mode is the default in Red Hat Enterprise Linux.
+• Permissive : SELinux loads the policies and is active, but instead of enforcing access control rules, 
+it logs access violations. This mode is helpful for testing and troubleshooting applications and rules.
+• Disabled : SELinux is turned off. SELinux violations are not denied or logged. Disabling SELinux is strongly discouraged.
+-------------------------------------------------------------------
+
+sestatus			\\ To check status of SELinux
+
+setenforce			\\ To set enforce of SELinux
+
+#How to change the SELinux from config file. 
+
+-- vim /etc/selinux/config
+	-- Go to line 22 --SELINUX=enforcing			\\Make changes in this line.
+setenforce 1			\\Man and learn about it. 
+getenforce			\\Man and learn about it. 
+
+-------------------------------------------------------------------
+
+Practice the enforcement of SELinux. 
+
