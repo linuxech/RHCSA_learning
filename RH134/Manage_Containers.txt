@@ -1,0 +1,15 @@
+Run Containers. 
+
+Containers was introduced after RHEL 8.
+
+Pre-Virtualization World:	
+		   ----App----
+	    -------Bins/Libs---------
+	----Host Operating System------
+------------Physical Server---------------
+
+Problems:	- Huge Cost
+		- Slow Deployment
+		- Hard to Migrate
+ 		- High CAPEX and OPEX
+
