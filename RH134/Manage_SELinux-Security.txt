@@ -7,7 +7,7 @@ Security Enhanced Linux (SELinux) is a critical security feature of Linux. Acces
 is controlled at a granular level. Processes are permitted to access only the resources that their SELinux policy or 
 Boolean settings specify.
 
-The policy is known as Target Policy. 
+The policy is known as Target Policy. Labels are used, labels are most important when using SELinux. 
 -----------------------------------------------------------------
 Manadatory Access Control -- 
 Can be used to restrict even Root users. 
@@ -45,6 +45,41 @@ setenforce 1			\\Man and learn about it.
 getenforce			\\Man and learn about it. 
 
 -------------------------------------------------------------------
+/etc/selinux/targeted/contexts/files
+
+-- Files that contains the policy for the changes and behaviour of timestamp and Metadata of file and their types. 
+
 
 Practice the enforcement of SELinux. 
+
+--------------------------------------------------------------------
+As per the command, the cp or mv command will also label the files based on the SELinux applied. 
+
+chcon 	\ to change lable of the file. 
+
+for example:
+chcon -t httpd_sys_content_t index.html	
+#This will implement the label of sys_content to the index file. 
+# You will get error when wrong label is entered. 
+
+restorecon 		#this will change the label of file to the label of directory. 
+---------------------------------------------------------------------
+
+vim /etc/httpd/conf/httpd.conf			\ Main config files for httpd
+	--comment the UserDir Disable			\Read the message in the config file. 
+	--Enable the line UserDir Public_html 		\Remove the comment from this line. 
+- Save quit exit
+- systemctl restart httpd
+
+-- Test this in the user and create the html
+-- Check user policy in SELinux --
+	-- getsebool -a | grep httpd
+		-- Look for httpd_enable_homedirs_off
+		-- setsebool httpd_enable_homedirs on		\This is temprory implemtation. 
+	-- Once you enable this policy you will be able to ping the index file in users directrory. 
+	-- semanage boolean -l | grep httpd_enable_homedirs
+		-- setsebool -P httpd_enable_homedirs on
+		-- semanage boolean -l | grep httpd_enable_homedirs	\\This time you will see both labels are set to On.
+
+
 
