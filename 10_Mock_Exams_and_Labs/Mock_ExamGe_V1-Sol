@@ -1,0 +1,148 @@
+.
+
+🛑 The Golden Grading Rule
+Do not grade yourself until AFTER you type reboot. If a service fails to start on boot, or a mount point drops you into emergency mode, you score 0 points for that entire task. Partial credit is rarely given in the real world for a system that doesn't boot.
+
+Task 0: The Gatekeeper
+Points: 0 (Pass/Fail Dependency)
+
+Grading: If you could not change the password and boot into the system, the exam is over.
+
+Solution Overview:
+
+Append rd.break to the kernel line in GRUB.
+
+mount -o remount,rw /sysroot
+
+chroot /sysroot
+
+passwd root (set to sovereign2026)
+
+touch /.autorelabel
+
+exit and exit
+
+Task 1: Network Configuration (10 Points)
+Grading: 5 pts for correct IP/Hostname. 5 pts if it connects automatically on reboot.
+
+Solution Overview:
+
+Bash
+
+hostnamectl set-hostname sovereign-node.example.com
+nmcli con mod "eth0" ipv4.addresses 192.168.X.50/24 ipv4.method manual connection.autoconnect yes
+nmcli con up "eth0"
+Task 2: User and Group Administration (10 Points)
+Grading: 2 pts for each user/group correctly created. 2 pts for Bob's password policy.
+
+Solution Overview:
+
+Bash
+
+groupadd sysadmins
+useradd alice && usermod -aG sysadmins alice
+useradd -u 2050 bob && usermod -aG sysadmins bob
+useradd -s /sbin/nologin charlie
+chage -M 30 bob
+Task 3: Collaborative Directories (10 Points)
+Grading: 5 pts for group ownership. 5 pts for the SGID bit and removing "other" permissions.
+
+Solution Overview:
+
+Bash
+
+mkdir -p /shared/ops
+chgrp sysadmins /shared/ops
+chmod g+s /shared/ops
+chmod o-rwx /shared/ops  # (Or chmod 2770 /shared/ops)
+Task 4: Advanced Permissions (ACLs) (5 Points)
+Grading: 5 pts if getfacl /var/tmp/fstab_backup shows user:charlie:rw-.
+
+Solution Overview:
+
+Bash
+
+cp /etc/fstab /var/tmp/fstab_backup
+setfacl -m u:charlie:rw /var/tmp/fstab_backup
+Task 5: Local Storage (LVM) (20 Points)
+Grading: 5 pts for PV/VG creation. 5 pts for exact extent math (50 extents). 10 pts for persistent mounting without booting into emergency mode.
+
+Solution Overview:
+
+Bash
+
+pvcreate /dev/vdb
+vgcreate -s 16M vg_data /dev/vdb  # -s sets extent size
+lvcreate -n lv_database -l 50 vg_data  # -l (lowercase) uses extent count
+mkfs.xfs /dev/vg_data/lv_database
+mkdir -p /mnt/database
+blkid /dev/vg_data/lv_database  # Copy UUID
+echo "UUID=<uuid> /mnt/database xfs defaults 0 0" >> /etc/fstab
+mount -a
+Task 6: Swap Space (10 Points)
+Grading: 5 pts for creation. 5 pts for persistence in /etc/fstab.
+
+Solution Overview:
+
+Bash
+
+fdisk /dev/vdc # (Create a 512M partition, e.g., /dev/vdc1)
+mkswap /dev/vdc1
+blkid /dev/vdc1 # Copy UUID
+echo "UUID=<uuid> swap swap defaults 0 0" >> /etc/fstab
+swapon -a
+Task 7: System Maintenance & Automation (10 Points)
+Grading: 10 pts if crontab -l -u alice shows the exact correct time format.
+
+Solution Overview:
+
+Bash
+
+crontab -e -u alice
+# Add this line:
+23 14 * * * logger "Alice checking in"
+Task 8: Archive and Search (5 Points)
+Grading: 5 pts if /root/backup.tar.gz exists and contains the correct files.
+
+Solution Overview:
+
+Bash
+
+mkdir /root/large_files
+find /etc -size +5M -exec cp {} /root/large_files/ \;
+tar -czvf /root/backup.tar.gz /root/large_files
+Task 9: Security (SELinux and Firewalld) (10 Points)
+Grading: 5 pts if Apache runs on 8282 (SELinux fix). 5 pts if accessible via curl (Firewall fix).
+
+Solution Overview:
+
+Bash
+
+# Edit /etc/httpd/conf/httpd.conf and change "Listen 80" to "Listen 8282"
+semanage port -a -t httpd_port_t -p tcp 8282
+firewall-cmd --permanent --add-port=8282/tcp
+firewall-cmd --reload
+systemctl enable --now httpd
+Task 10: Container Management (10 Points)
+Grading: 5 pts for rootless deployment. 5 pts for systemd integration and lingering.
+
+Solution Overview:
+
+Bash
+
+su - alice
+podman pull nginx
+podman run -d --name web_agent -p 8080:80 nginx
+
+# Setup Systemd
+mkdir -p ~/.config/systemd/user
+podman generate systemd --new --name web_agent > ~/.config/systemd/user/container-web_agent.service
+systemctl --user daemon-reload
+systemctl --user enable --now container-web_agent.service
+
+# Return to root to enable lingering
+exit
+loginctl enable-linger alice
+Your Next Steps
+When you execute this in your KVM, have a notebook beside you. Every time you have to use a man page or Google (after the exam) to fix a command, write that specific topic down.
+
