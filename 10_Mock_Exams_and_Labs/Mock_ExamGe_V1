@@ -1,0 +1,115 @@
+.
+
+🚨 Rules of Engagement
+Time Limit: 120 Minutes.
+
+The Golden Rule: You must reboot your machine at the end of the exam. If a service doesn't start, or a drive doesn't mount after the reboot, you get 0 points for that task.
+
+No Internet: You may use man pages, info pages, and /usr/share/doc, but you cannot use external search engines.
+
+🛠️ Pre-Flight Setup (Do this before starting the timer)
+Spin up a fresh RHEL 9 VM in your KVM environment.
+
+Attach two new, unformatted virtual disks (e.g., /dev/vdb at 5GB, and /dev/vdc at 2GB).
+
+Ensure the VM has basic internet access to pull packages (for the sake of the lab, unless you want to mount an ISO for a local repo).
+
+📝 RHCSA Mock Exam: "Project Sovereign"
+Task 0: The Gatekeeper (0 Points, but Pass/Fail)
+Restart your system. Interrupt the boot process, break into the system, and change the root password to sovereign2026. If you cannot do this, do not proceed with the rest of the exam.
+
+Task 1: Network Configuration
+
+Set the system hostname to sovereign-node.example.com.
+
+Configure your primary network interface statically with the IP 192.168.X.50 (replace X with your actual KVM subnet).
+
+Ensure the network connection starts automatically on boot.
+
+Task 2: User and Group Administration
+
+Create a group called sysadmins.
+
+Create a user named alice.
+
+Create a user named bob with the UID 2050.
+
+Create a user named charlie with a non-interactive shell (cannot log in).
+
+Add alice and bob as secondary members to the sysadmins group.
+
+Configure password aging for bob: His password must expire exactly 30 days from today.
+
+Task 3: Collaborative Directories
+
+Create a directory at /shared/ops.
+
+Change the group ownership of this directory to sysadmins.
+
+Ensure that any new files created in /shared/ops automatically inherit the sysadmins group.
+
+Grant read, write, and execute permissions to the group, but remove all permissions for "others".
+
+Task 4: Advanced Permissions (ACLs)
+
+Copy the file /etc/fstab to /var/tmp/fstab_backup.
+
+Configure the permissions on /var/tmp/fstab_backup so that the user charlie has read and write access. Do this without changing the file's primary owner or group.
+
+Task 5: Local Storage (LVM)
+
+Create a Physical Volume on your 5GB virtual disk.
+
+Create a Volume Group named vg_data with an extent size of 16MB.
+
+Create a Logical Volume named lv_database consisting of exactly 50 extents from vg_data.
+
+Format lv_database with the XFS file system.
+
+Mount it persistently to /mnt/database using the UUID.
+
+Task 6: Swap Space
+
+Create a 512MB swap partition on your 2GB virtual disk.
+
+Format and enable it.
+
+Ensure it mounts persistently across reboots.
+
+Task 7: System Maintenance & Automation
+
+Configure a cron job for the user alice.
+
+The job must run every day at exactly 14:23 (2:23 PM).
+
+The job should execute logger "Alice checking in".
+
+Task 8: Archive and Search
+
+Find all files in /etc (and its subdirectories) that are larger than 5MB.
+
+Copy those files into a new directory at /root/large_files.
+
+Create a gzip-compressed tar archive of the /root/large_files directory and save it as /root/backup.tar.gz.
+
+Task 9: Security (SELinux and Firewalld)
+
+Install the httpd package and enable it to start on boot.
+
+Configure httpd to listen on non-standard port 8282 instead of port 80.
+
+Configure SELinux to allow httpd to bind to port 8282.
+
+Configure firewalld to permanently allow incoming traffic on port 8282.
+
+Start the service and ensure it hosts a default page.
+
+Task 10: Container Management (RHEL 9 Specific)
+
+Log in as the user alice (Containers must be rootless).
+
+Pull the nginx image from a public registry.
+
+Run the container named web_agent in the background, mapping the host port 8080 to the container port 80.
+
+Configure this container to start automatically as a systemd service for the user alice (so it survives a reboot).
