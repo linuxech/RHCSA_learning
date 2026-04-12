@@ -1,0 +1,72 @@
+Evaluation Phase (The Answer Key)
+Once you've attempted the tasks, use this key to grade yourself. Each task is worth 10 points. You need a 70 to pass.
+
+Task 1: System Reconnaissance (10 Points)
+
+Bash
+
+hostname > /root/system_info.txt
+(You could also use hostnamectl or cat /etc/hostname)
+
+Task 2: The Directory Tree (10 Points)
+
+Bash
+
+mkdir -p /opt/training/linux101
+touch /opt/training/linux101/practice.txt
+(The -p flag in mkdir is required to create parent directories that don't exist yet!)
+
+Task 3: Basic User Management (10 Points)
+
+Bash
+
+useradd intern1
+passwd intern1 
+# (Then type the password twice when prompted)
+Task 4: Group Assignment (10 Points)
+
+Bash
+
+groupadd juniors
+usermod -aG juniors intern1
+(Forgetting the -a flag here is the most common beginner mistake!)
+
+Task 5: Ownership and Permissions (10 Points)
+
+Bash
+
+chgrp juniors /opt/training/linux101
+chmod 770 /opt/training/linux101
+(You can also use chmod ug+rwx,o-rwx /opt/training/linux101)
+
+Task 6: Text Manipulation (10 Points)
+
+Bash
+
+echo "I am learning Red Hat" >> /opt/training/linux101/practice.txt
+(You must use >> to append. If you used >, it would overwrite the file—which is fine here since it was empty, but >> is safer!)
+
+Task 7: Searching for Text (10 Points)
+
+Bash
+
+grep "ssh" /etc/services > /root/ssh_port.txt
+Task 8: Archiving and Compression (10 Points)
+
+Bash
+
+tar -czvf /root/training_backup.tar.gz /opt/training
+(Flags: c=create, z=gzip, v=verbose/show output, f=file)
+
+Task 9: Package Management (10 Points)
+
+Bash
+
+dnf install tmux -y
+Task 10: Basic Service Management (10 Points)
+
+Bash
+
+systemctl status sshd
+systemctl enable sshd
+(You can also combine them with systemctl enable --now sshd if it wasn't running).

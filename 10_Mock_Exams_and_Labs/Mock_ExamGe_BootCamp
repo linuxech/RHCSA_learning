@@ -1,0 +1,63 @@
+Rules of Engagement: Level 1
+Time Limit: 60 Minutes.
+
+The Environment: A fresh, running RHEL 9 VM. You are logged in as a regular user who has sudo privileges (or just log in as root).
+
+The Goal: Accuracy over speed.
+
+📝 RHCSA Mock Exam: Beginner Level ("Bootcamp")
+Task 1: System Reconnaissance
+
+Find your system's current hostname and write it into a new file located at /root/system_info.txt.
+
+Task 2: The Directory Tree
+
+Create a nested directory structure in one command: /opt/training/linux101.
+
+Inside linux101, create an empty file named practice.txt.
+
+Task 3: Basic User Management
+
+Create a new user named intern1.
+
+Set their password to linuxisfun.
+
+Task 4: Group Assignment
+
+Create a new group named juniors.
+
+Add the user intern1 to the juniors group.
+
+Task 5: Ownership and Permissions
+
+Change the group ownership of the directory /opt/training/linux101 to the juniors group.
+
+Change the permissions on /opt/training/linux101 so that the Owner and Group have Read, Write, and Execute (rwx) access, but Others have zero access (---).
+
+Task 6: Text Manipulation
+
+Add the sentence "I am learning Red Hat" to the file /opt/training/linux101/practice.txt. (Do this from the command line, do not open a text editor like vim or nano).
+
+Task 7: Searching for Text (Grep)
+
+Search the file /etc/services for the exact word ssh.
+
+Save only the lines that match into a new file at /root/ssh_port.txt.
+
+Task 8: Archiving and Compression (Tar)
+
+Create a gzip-compressed archive of the entire /opt/training directory.
+
+Save the archive as /root/training_backup.tar.gz.
+
+Task 9: Package Management
+
+Using the command line, install the package tmux.
+
+(Note: Your VM needs internet access to reach the default Red Hat or CentOS Stream repositories).
+
+Task 10: Basic Service Management
+
+The SSH service is critical. Verify its current status.
+
+Ensure the service named sshd is enabled to start automatically every time the server boots.
