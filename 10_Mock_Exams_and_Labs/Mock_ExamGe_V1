@@ -71,6 +71,27 @@ id intern1
 getent group juniors
 Success: The system should return no such user and no output for the group. If they exist, delete them with userdel -r intern1 and groupdel juniors.
 
+6. The Hardware Check (Crucial for Storage Tasks)
+Project Sovereign requires you to carve up LVMs and Swap space. You must verify that your host hypervisor actually attached those two extra virtual disks (5GB and 2GB) to the VM.
+
+Bash
+
+lsblk
+Success: You should see your main drive (e.g., vda) AND two unformatted drives (e.g., vdb at 5G and vdc at 2G).
+
+Failure: If you only see one drive, you need to shut down the VM and add the virtual hardware in KVM before starting the timer.
+
+7. The Clean Slate Check
+If you are reusing a VM, make sure no leftover volume groups or users exist that could mess up your exam grading.
+
+Bash
+
+# Check for existing volume groups
+vgs
+# Check for the users you are about to create
+id bob
+Success: vgs should ideally only show your root volume group (like rhel or cs), and id bob should return "no such user".
+
 You are cleared for takeoff! ✈️
 If those 5 checks pass, your RHEL 10 VM is perfectly configured to handle the exam.
 
