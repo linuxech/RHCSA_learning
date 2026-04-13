@@ -1,0 +1,79 @@
+Practice Bootcamp scenrio in the RHEL 10 env 
+
+1st Task: Finding Hostname and adding it to /root/system_info.txt
+	Found the hostname: using hostname command. 
+	--Unable to add any file in the root folder--
+-- Entered into super user and tried from inside the root folder. 
+Completed.
+
+2nd Task: The Directory tree /opt/training/linux101 in one command.
+	man the mkdir -- found the -p and -v as useful flags. 
+-- Directory created successfully--
+Created an empty file in the linux101 directory.
+
+3rd Task: Basic User Management
+- Create user intern1 with password linuxisfun.
+Man the useradd and passwd command:
+
+ran sudo useradd intern1 -- to create user. 
+ran echo "linuxisfun" | sudo passwd -s intern1	-- to input the passwd for intern1.
+
+--Successful----
+
+4th Task: Group Assignment
+- Create a new group named juniors. 
+
+- sudo groupadd juniors -- To create the juniors group.
+- sudo groupmod -U intern1 juniors -- To add the intern1 in that group.
+
+--Completed--
+
+5th Task Ownership and Permissions
+- Change the group ownership of /opt/training/linux101 to juniors.
+- Change the permissions on /opt/training/linux101, so only owner have RWX permission and others 0 access. 
+
+- sudo chgrp juniors ./opt/training/linux101 -- changed the linux101 group owner to junior
+- sudo chmod 700 ./opt/training/linux101/practice.txt -- changed the permission to rwx--------.
+
+--Completed--
+
+6th Task: Text Manipulation
+- Add the sentence "I am learning Red Hat" to the file /opt/training/linux101/practice.txt.
+	 (Do this from the command line, do not open a text editor like vim or nano).
+
+- echo "I am learning Red Hat" >> ./opt/training/linux101/practice.txt
+
+-- Completed--
+
+7th Task: Searching for Text (Grep)
+
+- Search the file/etc/services for the exact word ssh.
+- Save only the lines that match into a new file at /root/ssh_port.txt
+
+- Enter super user
+	run grep 'ssh' /etc/services >> /root/ssh_port.txt -- Saves the output.
+
+--Completed--
+
+8th Task: Archiving and Compression(tar)
+- Create a gzip-compressed archive of /opt/training directory.
+- save the archive as /root/training_backup.tar.gz
+
+- Enter SU and run 
+	gzip -rc ./opt/training >> /root/training_backup.tar.gz
+Doubtfull. 
+-- Completed---
+
+9th Task: Package Management
+- Using CLI, install the package tmux
+
+- sudo dnf install tmux -- Installing tmux
+
+-- Completed --
+
+10th Task: Basic Service Management
+- check SSH service, verify it's current status
+
+- sudo systemctl status sshd -- Service is active. 
+
+--Completed--

@@ -1,0 +1,136 @@
+work.
+
+🚨 Pre-Flight Warning
+Because we are stepping up to exam-level logic, you must do this on your RHEL 9 VM. RHEL 10 handles some of these underlying mechanics differently, and practicing on it now might betray your muscle memory on test day.
+
+📝 RHCSA Mock Exam Level 2: "The Logic Puzzle"
+Time Limit: 90 Minutes.
+Goal: Accuracy, verification, and using the man pages when you forget a flag.
+
+Task 1: The Non-Standard User
+The security team needs a service account for a legacy application.
+
+Create a group named legacy_app with a specific GID of 3050.
+
+Create a user named app_runner.
+
+The user app_runner must belong to the legacy_app group as its primary group.
+
+The user must have a custom home directory located at /opt/app_runner (not /home/app_runner).
+
+The user must not be able to log in to an interactive shell.
+
+Task 2: The "Safe" Collaboration Directory
+Your development team needs a shared workspace, but they keep accidentally deleting each other's files.
+
+Create a directory at /mnt/dev_share.
+
+Change the group ownership to the legacy_app group.
+
+Ensure anyone in the legacy_app group can read, write, and execute in this directory.
+
+The Catch: You must configure the directory so that users can only delete or rename files that they personally created. (They cannot delete another user's file).
+
+Task 3: The Surgical Search
+Your server is running out of inodes, and you need to find old, small config files.
+
+Find all files inside the /etc directory that end with the .conf extension and are smaller than 10KB.
+
+Copy (do not move) all the files you find into a new directory located at /root/conf_backups.
+
+Hint: You must do this in a single command pipeline using find.
+
+Task 4: The Precision Sudo
+The app_runner user (from Task 1) needs to be able to restart the firewalld service, but nothing else.
+
+Configure the system so that app_runner can run systemctl restart firewalld with root privileges.
+
+They must NOT be prompted for a password when they run it.
+
+Constraint: Do not edit the main /etc/sudoers file directly. Use a drop-in file.
+
+Task 5: The Silent Cron Job
+You need a heartbeat monitor that logs the system uptime, but you don't want it spamming your local mail spool with errors.
+
+Schedule a cron job for the root user to run every 5 minutes.
+
+The job should run the uptime command and append the output to /var/log/system_heartbeat.log.
+
+The Catch: You must redirect all Standard Error (stderr) to /dev/null so that if the command fails, it fails silently.
+
+Task 6: The Ghost Link
+A script is hardcoded to look for a file at /tmp/database_config.yaml, but the actual file lives at /etc/app/config.yaml.
+
+Create the necessary directory and the actual file at /etc/app/config.yaml. Write "version: 1.0" inside it.
+
+Create a link at /tmp/database_config.yaml that points to the actual file.
+
+The Catch: It must be a link that survives even if the /tmp directory is moved to a different filesystem partition. (Think about the difference between Hard Links and Soft Links).
+
+Task 7: Time Travel
+The server was provisioned in the wrong physical datacenter zone.
+
+Change the system's timezone to UTC.
+
+Verify that the NTP service (chronyd) is currently active and synchronizing the clock.
+
+🛑 Evaluation Phase (The Answer Key)
+Do not look at this until you have attempted all 7 tasks! Try to use man find, man chmod, etc., to figure out the syntax before peeking.
+
+Task 1: The Non-Standard User (15 Points)
+
+Bash
+
+sudo groupadd -g 3050 legacy_app
+sudo useradd -g legacy_app -d /opt/app_runner -s /sbin/nologin app_runner
+(Logic: -g forces primary group, -G would be secondary. -d specifies the home dir. -s sets the shell).
+
+Task 2: The "Safe" Collaboration Directory (15 Points)
+
+Bash
+
+sudo mkdir -p /mnt/dev_share
+sudo chgrp legacy_app /mnt/dev_share
+sudo chmod 2770 /mnt/dev_share  # Adds SGID (2) so files inherit the group
+sudo chmod +t /mnt/dev_share    # Adds the Sticky Bit (+t) so users can only delete their own files
+# Alternatively, in one command: sudo chmod 3770 /mnt/dev_share
+Task 3: The Surgical Search (20 Points)
+
+Bash
+
+sudo mkdir /root/conf_backups
+sudo find /etc -type f -name "*.conf" -size -10k -exec cp {} /root/conf_backups/ \;
+(Logic: -size -10k means less than 10KB. -exec runs a command on the results, {} represents the file found, and \; closes the exec loop).
+
+Task 4: The Precision Sudo (15 Points)
+
+Bash
+
+sudo visudo -f /etc/sudoers.d/app_runner
+# Add this exact line:
+app_runner ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart firewalld
+Task 5: The Silent Cron Job (15 Points)
+
+Bash
+
+sudo crontab -e
+# Add this exact line:
+*/5 * * * * /usr/bin/uptime >> /var/log/system_heartbeat.log 2> /dev/null
+(Logic: */5 means every 5 minutes. >> appends standard output. 2> redirects standard error).
+
+Task 6: The Ghost Link (10 Points)
+
+Bash
+
+sudo mkdir -p /etc/app
+echo "version: 1.0" | sudo tee /etc/app/config.yaml
+sudo ln -s /etc/app/config.yaml /tmp/database_config.yaml
+(Logic: Hard links cannot cross filesystem boundaries. /tmp and /etc are often on different partitions. Therefore, you must use a Soft Link -s).
+
+Task 7: Time Travel (10 Points)
+
+Bash
+
+sudo timedatectl set-timezone UTC
+sudo systemctl status chronyd
+Fire up that RHEL 9 VM and give this a shot.
