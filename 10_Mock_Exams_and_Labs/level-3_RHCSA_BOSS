@@ -1,0 +1,101 @@
+The Cascade. It represents about 80% of the true exam reality.
+
+🚨 Pre-Flight Setup
+Environment: RHEL 9 VM (Do not use RHEL 10 for this).
+
+Hardware: Add ONE unformatted 10GB virtual disk (/dev/vdb).
+
+Network: Ensure the VM has an active internet connection to pull container images and packages.
+
+Time Limit: 150 Minutes (2.5 hours).
+
+The Golden Rule: You must reboot at the end. If it doesn't survive a reboot, you score 0 for that objective.
+
+📝 RHCSA Mock Exam Level 3: "The Cascade"
+Task 1: The Foundation (Storage)
+Your company requires a dedicated storage pool for a new application.
+
+Create a Volume Group named app_vg using your 10GB disk, with a physical extent size of 32MB.
+
+Create a Logical Volume named lv_webdata that uses exactly 50 extents.
+
+Format the volume with the xfs filesystem.
+
+Mount it persistently to /srv/web_content.
+
+Task 2: The Identity Matrix (Users & Groups)
+The development team needs access to the new storage.
+
+Create a group named web_devs.
+
+Create two users: natasha and clint.
+
+Make both users secondary members of the web_devs group.
+
+Configure the system so that natasha's password must be changed every 45 days, and she receives a warning 5 days before it expires.
+
+Task 3: The Collaborative Trap (Permissions)
+The developers need to work together in the new storage volume.
+
+Change the group ownership of /srv/web_content to the web_devs group.
+
+Ensure that any new files created inside /srv/web_content automatically inherit the web_devs group.
+
+Set permissions so that the owner and group have full read/write/execute access, but others have zero access.
+
+The Specifics: Create a file inside /srv/web_content owned by root. Use an Access Control List (ACL) to grant the user clint read-only access to this specific file without changing its standard ownership.
+
+Task 4: The Network Storage (Autofs)
+Your server needs to connect to an older legacy NFS server, but only when requested.
+
+Configure autofs so that when a user accesses /net/public, it automatically mounts an NFS share.
+
+Simulation constraint: Since you don't have a real NFS server, configure the autofs map to mount a local directory. Map /net/public to mount your own /var/ftp directory using the -bind option.
+
+Task 5: The Silent Web Server (SELinux & Firewalld)
+You need to host an internal status page, but security dictates it cannot use standard ports.
+
+Install httpd and enable it to start on boot.
+
+Change the Apache configuration so it listens on port 8090.
+
+Create a simple index.html file in the default /var/www/html directory.
+
+Configure SELinux to allow httpd to bind to port 8090.
+
+Configure the firewall to permanently allow traffic on port 8090.
+
+Task 6: The "Advanced" Boolean
+The web developers have written a script that requires the Apache web server to connect to an external database.
+
+By default, SELinux prevents httpd from initiating outbound network connections.
+
+Find the correct SELinux boolean that allows the web server to connect to the network/database, and turn it ON persistently.
+
+Task 7: The Rootless Container (The Heavy Hitter)
+Natasha needs to run a lightweight proxy container that survives system reboots.
+
+Log in as the user natasha.
+
+Pull the nginx image from a public registry.
+
+Run the container named natasha_proxy in the background.
+
+Map port 8080 on the host to port 80 in the container.
+
+The Trap: Map the directory /srv/web_content (from Task 1) to /usr/share/nginx/html inside the container. You must handle the SELinux context correctly for this volume map, or the container will get a Permission Denied error.
+
+Configure the container to start automatically as a systemd user service for natasha.
+
+Ensure the service starts even if natasha is not currently logged into the server.
+
+Task 8: The Automation Backup
+Create a cron job for the root user that runs every day at 11:30 PM.
+
+The job must execute the following command: tar -czvf /root/web_backup.tar.gz /srv/web_content.
+
+The Strategy Check
+Look at the structure of this exam. If you mess up Task 1 (/srv/web_content), you automatically fail Task 3 (Permissions), Task 7 (Containers), and Task 8 (Backups) because they all rely on that specific mount point existing and being persistent. That is 40% of the exam wiped out by one bad /etc/fstab entry.
+
+Set your timer for 2.5 hours. Fire up the RHEL 9 VM.
+
