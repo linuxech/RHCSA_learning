@@ -1,0 +1,26 @@
+Part 1: The Diagnostic Theory (Conceptual Analysis)
+Answer these without opening a terminal or web browser. This tells me if you understand the "why" behind the commands.
+
+1. You created a new directory at /custom_web and configured Apache to serve files from it. The permissions are set to 755, but users are getting a "403 Forbidden" error. What is the most precise tool to fix this?
+A) setfacl -m u:apache:rx /custom_web
+B) semanage fcontext -a -t httpd_sys_content_t "/custom_web(/.*)?" && restorecon -Rv /custom_web
+C) setsebool -P httpd_enable_homedirs 1
+D) chcon -t httpd_sys_content_t /custom_web
+
+2. You need to increase the size of an active, mounted XFS logical volume (/dev/vg01/lv_data) using all available free space in the volume group. What is the single most efficient command?
+A) lvextend -L +100%FREE /dev/vg01/lv_data && xfs_growfs /mnt/data
+B) lvresize -l +100%FREE -r /dev/vg01/lv_data
+C) vgextend /dev/vg01/lv_data && resize2fs /dev/vg01/lv_data
+D) lvextend -l 100%FREE /dev/vg01/lv_data -r
+
+3. In RHEL 10, what is the Red Hat-supported method for ensuring a rootless Podman container starts automatically on system boot?
+A) Running podman generate systemd --new --name <container> and enabling the resulting .service file.
+B) Creating a standard systemd service unit file in /etc/systemd/system/ that executes podman start.
+C) Writing a .container Quadlet file in ~/.config/containers/systemd/ and running systemctl --user daemon-reload.
+D) Appending the podman run command to the user's ~/.bash_profile.
+
+4. You create a file data.txt with an inode of 5544. You run ln data.txt backup.txt. Then, a junior admin runs rm data.txt. What happens to backup.txt?
+A) It becomes a broken link pointing to a deleted file.
+B) It retains the data and the inode 5544, and the disk space is not freed.
+C) The system prevents the deletion of data.txt because a hard link exists.
+D) backup.txt is automatically deleted as well.

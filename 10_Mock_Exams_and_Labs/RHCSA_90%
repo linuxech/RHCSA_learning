@@ -1,0 +1,75 @@
+Part 2: The Sovereign Crucible (Practical Execution)
+🚨 Pre-Flight Rules:
+
+Environment: RHEL 10 VM.
+
+Hardware: Two unformatted virtual disks attached (10GB and 5GB).
+
+Time Limit: 150 Minutes.
+
+Requirement: The system MUST boot cleanly without intervention at the end.
+
+Task 1: System Baseline & Identity
+Interrupt the bootloader, reset the root password to Sovereign10!, and boot successfully.
+
+Set the hostname to alpha-node.sovereign.lan.
+
+Create a group named engineers.
+
+Create users stark and banner. Both must have engineers as a secondary group.
+
+Force the user stark to change their password on the very next login.
+
+Task 2: Advanced Storage Engineering
+Create a Volume Group named vg_secure on the 10GB disk with an 8MB physical extent size.
+
+Create a Logical Volume named lv_vault consisting of exactly 200 extents.
+
+Format it with XFS and mount it persistently to /mnt/vault.
+
+Create a 512MB Swap partition on the 5GB disk and mount it persistently.
+
+Task 3: The Restricted Zone
+Change the group ownership of /mnt/vault to engineers.
+
+Configure the directory so all new files inherit the engineers group, and users can only delete files they personally own.
+
+Create a file inside /mnt/vault named master_key.txt owned by root.
+
+Using an ACL, grant banner read and write access to master_key.txt, but explicitly deny stark any access to it.
+
+Task 4: The Archive Automation
+Find all files in /etc that end in .conf.
+
+Using a single find pipeline, copy them to /mnt/vault/conf_backups/ (create the directory if it doesn't exist).
+
+Schedule a cron job for the root user to run at 2:45 PM on every Friday. The job must run: tar -czvf /root/friday_backup.tar.gz /mnt/vault/conf_backups/
+
+Task 5: SELinux & Firewalld Precision
+Install httpd. Configure it to listen on port 8888.
+
+Create a custom document root at /opt/web_data. Edit the Apache config to serve files from this directory instead of /var/www/html.
+
+Create an index.html file in /opt/web_data saying "Crucible Active".
+
+Configure the necessary SELinux port policies and file contexts so the service starts without permission errors.
+
+Permanently open port 8888 in the firewall and start the service persistently.
+
+Task 6: RHEL 10 Native Containerization
+Log in as banner.
+
+Pull the nginx image from a public registry.
+
+Using the RHEL 10 standard (Quadlets), configure a rootless container named banner_proxy.
+
+Map port 8080 on the host to port 80 in the container.
+
+Map the host directory /mnt/vault to /usr/share/nginx/html inside the container. Ensure the SELinux context is mapped correctly so the container doesn't get a 403 Forbidden error.
+
+Ensure the container starts via systemd and survives a reboot without banner logging in.
+
+Task 7: The Autofs Bridge
+Configure autofs so that accessing the directory /bridge/data automatically mounts the local directory /opt/web_data.
+
+Once your 150 minutes are up, run reboot. If the machine comes back up and your container, web server, and mounts are active, you have survived the Crucible.
