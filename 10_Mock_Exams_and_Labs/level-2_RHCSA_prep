@@ -1,5 +1,3 @@
-work.
-
 🚨 Pre-Flight Warning
 Because we are stepping up to exam-level logic, you must do this on your RHEL 9 VM. RHEL 10 handles some of these underlying mechanics differently, and practicing on it now might betray your muscle memory on test day.
 
@@ -11,6 +9,7 @@ Task 1: The Non-Standard User
 The security team needs a service account for a legacy application.
 
 Create a group named legacy_app with a specific GID of 3050.
+\\groupadd -g 3050 legacy_app
 
 Create a user named app_runner.
 
@@ -20,6 +19,9 @@ The user must have a custom home directory located at /opt/app_runner (not /home
 
 The user must not be able to log in to an interactive shell.
 
+\\ useradd -d /opt/app_runner -g legacy_app app_runner
+\\usermod -s /sbin/nologin app_runner (Checked the inernet) 
+
 Task 2: The "Safe" Collaboration Directory
 Your development team needs a shared workspace, but they keep accidentally deleting each other's files.
 
@@ -28,8 +30,10 @@ Create a directory at /mnt/dev_share.
 Change the group ownership to the legacy_app group.
 
 Ensure anyone in the legacy_app group can read, write, and execute in this directory.
+ \\chgrp -R legacy_app /mnt/dev_share (checked the internet)
 
 The Catch: You must configure the directory so that users can only delete or rename files that they personally created. (They cannot delete another user's file).
+\\ chmod +t /mnt/dev_share
 
 Task 3: The Surgical Search
 Your server is running out of inodes, and you need to find old, small config files.
@@ -39,6 +43,7 @@ Find all files inside the /etc directory that end with the .conf extension and a
 Copy (do not move) all the files you find into a new directory located at /root/conf_backups.
 
 Hint: You must do this in a single command pipeline using find.
+\\ find /etc/ -type f -name "*.conf" -size -10k -exec {/etc/.} /root/conf_backups (Unable to complete even looked the command syntax)
 
 Task 4: The Precision Sudo
 The app_runner user (from Task 1) needs to be able to restart the firewalld service, but nothing else.
@@ -47,7 +52,9 @@ Configure the system so that app_runner can run systemctl restart firewalld with
 
 They must NOT be prompted for a password when they run it.
 
-Constraint: Do not edit the main /etc/sudoers file directly. Use a drop-in file.
+Constraint: Do not edit the main /etc/sudoers file directly. Use a drop-in file. (Checked the internet for syntax)
+
+\\ app_runner ALL= NOPASSWD: /usr/bin/systemctl restart firewalld >> /etc/sudoers.d /app_runner 
 
 Task 5: The Silent Cron Job
 You need a heartbeat monitor that logs the system uptime, but you don't want it spamming your local mail spool with errors.
@@ -57,6 +64,9 @@ Schedule a cron job for the root user to run every 5 minutes.
 The job should run the uptime command and append the output to /var/log/system_heartbeat.log.
 
 The Catch: You must redirect all Standard Error (stderr) to /dev/null so that if the command fails, it fails silently.
+\\ sudo crontab -e
+\\ */5 * * * * /usr/bin/uptime >> /var/log/system_heartbeat.log 2>> /dev/null (Looked up for syntax and improvised)
+ 
 
 Task 6: The Ghost Link
 A script is hardcoded to look for a file at /tmp/database_config.yaml, but the actual file lives at /etc/app/config.yaml.
@@ -67,12 +77,21 @@ Create a link at /tmp/database_config.yaml that points to the actual file.
 
 The Catch: It must be a link that survives even if the /tmp directory is moved to a different filesystem partition. (Think about the difference between Hard Links and Soft Links).
 
+\\ mkdir /etc/app
+\\ version: 1.0 >> /etc/app/config.yaml
+\\ ln /etc/app/config.yaml database_config.yaml (checked from internet for syntax)
+-- Checked the Innode both have the same Innode. 
+
 Task 7: Time Travel
 The server was provisioned in the wrong physical datacenter zone.
 
 Change the system's timezone to UTC.
 
 Verify that the NTP service (chronyd) is currently active and synchronizing the clock.
+\\ sudo timedatectl set-timezone Iceland (Checked the internet)
+\\ sudo systemctl status chronyd -- active and running
+
+
 
 🛑 Evaluation Phase (The Answer Key)
 Do not look at this until you have attempted all 7 tasks! Try to use man find, man chmod, etc., to figure out the syntax before peeking.
