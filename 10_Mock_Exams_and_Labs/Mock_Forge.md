@@ -2,18 +2,27 @@ Operation: Forge. This contains 6 drills (18 steps total).
 
 Open your terminal. Focus strictly on the exact syntax for each step. When you are done, paste your command history!
 
+Testing these on live vm with a newuser Forage
+added the user to wheel group
+logged into the user using GUI and not su -Forage
+
 🚨 Rules of Engagement
 Assume Prerequisites: If a drill mentions a Volume Group like vg_data, assume it already exists on your system with plenty of free space.
 
 No Google: Rely entirely on your memory and the man pages (e.g., man lvextend, man semanage-fcontext).
 
 Just the Commands: You don't have to execute all of this on a live VM if you don't want to break your current setup. You can simply write out the exact commands you would type in a text file and paste them here for grading.
+using the document of Drill 1st for Lvm commands instead of google. 
 
 🗄️ Drill 1: The LVM Expansion (Storage)
 Context: Your web server is out of space and needs to be expanded live, without unmounting.
 
 Step 1: Create a Logical Volume named lv_web inside vg_data that is exactly 1GB in size. Format it with the ext4 filesystem. (We are using ext4 instead of xfs here to test your tool knowledge).
+sudo pvcreate /dev/vdc	\\created physical volume
+sudo vgcreate vg_data /dev/vdc	\ ceated the volume group
+sudo lvcreate -s 1G lv_web vg_data // System unable to accept the vg_data input: might be because the other vg group name is vg_database.
 
+-- Skipping it for now----
 Step 2: Mount it to /mnt/web.
 
 Step 3: The alarm goes off—you need more space. Extend lv_web to 1.5GB in total, and automatically resize the underlying ext4 filesystem in a single command.
