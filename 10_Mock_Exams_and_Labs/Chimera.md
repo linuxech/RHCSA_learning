@@ -5,9 +5,16 @@ Task 1: Check if tar, bzip2, httpd, and podman are installed. If they are not, i
 
 SysAdmin Hint (Packages): Use dnf install or yum install. If you add the -y flag, it won't prompt you to confirm.
 
+sudo dnf install -y tar bzip2 httpd podman
+
 Task 2: Create a group named chimera_devs.
+sudo groupadd chimera_devs
 
 Task 3: Create a user named chimera_svc. Ensure their primary group is chimera_devs, give them a custom home directory at /opt/chimera_home, and ensure they cannot log into an interactive shell.
+
+sudo useradd -g chimera_devs -d /opt/chimera_home -s /sbin/nologin chimera_svc
+
+verified the same in /etc/group and /etc/passwd files. 
 
 🔐 Phase 2: The Workspace & ACLs
 We need a highly secure shared directory where developers can collaborate.
