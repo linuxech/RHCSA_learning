@@ -160,6 +160,18 @@ Task 21: Start and enable the httpd service. Check its status to ensure it didn'
 sudo systemctl reload-or-restart httpd.service
 
 Shut down the system, will check after return, Also, system is installing updates.
+
+--- httpd service not running after restart ------
+ran sudo systemctl enable httpd.service
+sudo systemctl restart http.service
+
+-- rebooting the device again to confirm if the httpd remain enabled/running after reboot. ---
+
+Survived the reboot. 
+httpd running although showing status as Idle/busy workers 100/0;
+-- Not sure what went wrong here. ---
+--Found the issue network was set for default for backend/ switched to the right one ---
+
  
 🐳 Phase 6: The Modern Deployment (Quadlets)
 Web servers are legacy. Let's deploy an Nginx container using the new RHEL 10 standard.
@@ -168,9 +180,18 @@ Task 22: We are going to run the container as chimera_svc. As root, enable linge
 
 SysAdmin Hint (Quadlets): loginctl enable-linger chimera_svc.
 
+sudo loginctl enable-linger chimera_svc
+
 Task 23: Switch to the user (su - chimera_svc). Create the exact directory structure required for Quadlets.
 
+the user chimera_svc was a nologin user, 
+when trying su - chimera_svc
+error as "This account is currently not available"
+
 SysAdmin Hint (Quadlets): Systemd looks in a very specific hidden folder in the user's home directory. mkdir -p ~/.config/containers/systemd/.
+
+-- No existing container folder inthe /.config directory --
+still ran sudo mkdir -p ~/.config/containers/systemd/
 
 Task 24: Create a file named proxy.container inside that new directory. Write the configuration to pull nginx:latest and publish host port 8080 to container port 80.
 
@@ -180,8 +201,18 @@ PublishPort=8080:80
 [Install]
 WantedBy=default.target
 
+sudo nano ~/.config/containers/systemd/proxy.container
+--Added the above text From [Container] tp target---
+save and exit
+
 Task 25: Tell systemd to read your new file, then enable and start the container in one command.
 
 SysAdmin Hint (Quadlets): First: systemctl --user daemon-reload. Second: systemctl --user enable --now proxy.service (Notice it is .service, not .container!).
+
+
+try to ran sudo systemctl --user daemon-reload  /No error 
+sudo systemctl --user proxy.service //Failed to enable unit: Unit proxy.service does not exist. 
+
+--- I didn't understand any of the steps i did in last phase. 
 
 Mission Complete. Take it Phase by Phase. If you get stuck, read the hint, check the man page, and try again. Paste your terminal output here for whichever Phase you complete first!
