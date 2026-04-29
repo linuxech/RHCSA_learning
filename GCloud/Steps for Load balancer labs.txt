@@ -1,0 +1,67 @@
+  gcloud compute instances create web3 \
+    --zone=us-west4-b \
+    --tags=network-lb-tag \
+    --machine-type=e2-small \
+    --image-family=debian-12 \
+    --image-project=debian-cloud \
+    --metadata=startup-script='#!/bin/bash
+      apt-get update
+      apt-get install apache2 -y
+      service apache2 restart
+      echo "
+<h3>Web Server: web3</h3>" | tee /var/www/html/index.html'
+
+Add firewall rule--- 
+gcloud compute firewall-rules create www-firewall-network-lb \
+    --target-tags network-lb-tag --allow tcp:80
+    
+    -- Creating static external IP
+    gcloud compute addresses create network-lb-ip-1 \
+  --region Region
+  
+  
+  -- Creating target pool and forwarding rule
+  
+  gcloud compute target-pools create www-pool \
+  --region Region --http-health-check basic-check
+    
+    Adding instances
+    
+    gcloud compute target-pools add-instances www-pool \
+    --instances web1,web2,web3
+    
+    Adding forwarding rule
+    gcloud compute forwarding-rules create www-rule \
+    --region  Region \
+    --ports 80 \
+    --address network-lb-ip-1 \
+    --target-pool www-pool
+    
+    -- Sending traffic to instances
+    gcloud compute forwarding-rules describe www-rule --region Region
+    
+    -- ACcess external IP
+    IPADDRESS=$(gcloud compute forwarding-rules describe www-rule --region Region --format="json" | jq -r .IPAddress)
+    
+    
+    
+    
+   gcloud compute instance-templates create lb-backend-template \
+  --region=us-west4 \
+  --network= default  \
+  --subnet=AUTO \
+  --machine-type=e2-medium \
+  --stack-type=IPv4_IPv6 \
+  --tags=allow-health-check \
+  --image-family=debian-12 \
+  --image-project=debian-cloud \
+  --metadata=startup-script='#! /bin/bash
+    apt-get update
+    apt-get install apache2 -y
+    a2ensite default-ssl
+    a2enmod ssl
+    vm_hostname="$(curl -H "Metadata-Flavor:Google" \
+    http://metadata.google.internal/computeMetadata/v1/instance/name)"
+    echo "Page served from: $vm_hostname" | \
+    tee /var/www/html/index.html
+    systemctl restart apache2'
