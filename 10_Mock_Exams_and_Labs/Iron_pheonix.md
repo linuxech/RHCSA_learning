@@ -10,16 +10,28 @@ We need a dedicated data drive and extra swap space. Assume you have a 5GB disk 
 sudo pvcreate /dev/vdb  
 
 Task 1: Create a Volume Group named vg_phoenix on /dev/vdb with a Physical Extent (PE) size of 8MB.
+
 sudo vgcreate vg_pheonix /dev/vdb -s 8M
 
 Task 2: Create a Logical Volume named lv_data that is 500MB in size, and format it with XFS.
-
+sudo lvcreate -L 500M -n lv_data vg_pheonix
+sudo mkfs.xfs /dev/vg_pheonix/lv_data
 
 Task 3: Create a second Logical Volume named lv_swap that is 256MB in size, and format it as swap space.
+sudo lvcreate -L 256M -n lv_swap vg_pheonix
+sudo mkswap /dev/vg_pheonix/lv_swap
 
 Task 4: Create a mount point at /mnt/phoenix_data. Add both lv_data and lv_swap to /etc/fstab so they mount/activate automatically on boot. Mount the drive and turn on the swap to verify.
+mkdr -p /mnt/pheonix
 
+nano /etc/fstab
+-- UUID /mnt/phoenix_data xfs defaults 0 0	\\for lv_data
+--UUID /dev/vg_pheonix/lv_swap swap swap defaults 0 0 \\for swap
+
+sudo swapon /dev/vg_pheonix/lv-swap
 SysAdmin Hint (Fstab): You can use the device paths (e.g., /dev/vg_phoenix/lv_data) in /etc/fstab if you don't want to copy UUIDs. Remember, the filesystem type for swap is just swap. Use mount -a and swapon -a to test!
+
+\\checked using lvscan and lsblk
 
 🔐 Phase 2: Strict Permissions & ACLs
 Locking down the new drive.
