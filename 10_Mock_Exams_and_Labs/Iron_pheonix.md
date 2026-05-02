@@ -37,6 +37,9 @@ SysAdmin Hint (Fstab): You can use the device paths (e.g., /dev/vg_phoenix/lv_da
 Locking down the new drive.
 
 Task 5: Create a group named data_handlers. Change the group ownership of /mnt/phoenix_data to this group.
+sudo groupadd data_handlers
+sudo chgrp -aG /mnt/pheonix_data data_handlers
+
 
 Task 6: Using octal math, set the permissions on /mnt/phoenix_data so the Owner and Group have full rwx, Others have ---, and all new files inherit the data_handlers group (SGID).
 
