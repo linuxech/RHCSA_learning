@@ -63,4 +63,38 @@ After another retake: 100%
 
 --------------------Resources and Access in the cloud
 
+Lab Work-----
+Deploy the LAMP in Google cloud and access it. 
+
+Quiz:
+
+Quiz
+Passing score: 66%
+1.
+
+Choose the correct completion: Services and APIs are enabled on a per-__________ basis.
+Folder
+Billing account
+Project
+Organization
+2.
+
+Which of these values is globally unique, permanent, and unchangeable, but can be modified by the customer during creation?
+The project's billing credit-card number
+The project ID
+The project number
+The project name
+3.
+
+Select the list of IAM role types that are ordered from broadest to finest-grained.
+Basic roles, predefined roles, custom roles
+Custom roles, predefined roles, basic roles
+Predefined roles, custom roles, basic roles
+
+
+1st Attempt Scored: 66%
+5th Attempt: 100%
+--- Completed---------------
+
+
 
