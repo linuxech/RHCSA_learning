@@ -99,5 +99,63 @@ Predefined roles, custom roles, basic roles
 -------------------------------------Virtual Machine and Network in CLouds
 
 
+Assesment: Get Started with Virtual Private Cloud Networking and 
+		Compute Engine
+Cost: 5 Credits
+
+Quiz:
+Passing score: 80%
+1.
+
+How does global Cloud Load Balancing allow you to balance HTTP-based traffic?
+Across multiple physical machines in a single data center.
+Across multiple virtual machine instances in a single Compute Engine region.
+Across multiple Compute Engine regions.
+Across multiple Google Cloud services.
+2.
+
+In Google Cloud VPCs, what scope do subnets have?
+Multi-regional
+Regional
+Zonal
+Global
+3.
+
+Which of the following describes a Virtual Private Cloud (VPC)?
+A service that routes traffic through a Google Point of Presence (PoP).
+An option that allows one or more direct, private connections to Google.
+A fully distributed, software-defined, managed service for traffic distribution.
+A secure, individual, private cloud-computing model hosted within a public cloud.
+4.
+
+What is the main reason customers choose Spot VMs?
+To use custom machine types.
+To reduce cost on premium operating systems.
+To reduce cost.
+To improve performance.
+5.
+
+For which of these interconnect options is a Service Level Agreement available?
+Direct Peering
+Dedicated Interconnect
+Carrier Peering
+Standard Network Tier
 
 
+
+1st Attempt: 0%
+--REvising the course---
+10th Attempt: 100%
+
+----------------------------Storage on cloud
+
+Cloud Storage: Durable/Highly available. for objects storage. Fully managed, scalable service. 
+BLOB. Into buckets.  Holds history of changes in objects.  
+
+Cloud SQL: 
+
+Spanner:
+
+Firestore:
+
+Bigtable:
