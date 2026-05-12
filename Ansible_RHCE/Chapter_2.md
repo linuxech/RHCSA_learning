@@ -11,3 +11,4 @@ ghcr -- Github Container Regitry. It contains
 How deployment happens:
 	Ansible-navigator uses container to connect with Managed hosts from control node. 
 
+--- Revise the containers from RHCSA-------
