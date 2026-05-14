@@ -14,3 +14,4 @@ How deployment happens:
 --- Revise the containers from RHCSA-------
 Doc---- 
 Podman and dependencies
+-- Go with RHCSA v9
